@@ -9,6 +9,8 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
+import com.example.demo.models.enums.RoleEnum;
+
 @Entity
 @Table(name = "tb_role")
 public class Role implements Serializable{
@@ -20,17 +22,17 @@ public class Role implements Serializable{
 	@Column(name = "role_id")
 	private Long id;
 	
-	@Column(name = "role_name", unique = true)
+	@Column(name = "role_name")
 	private String name;
 	
 	public Role() {
 		
 	}
 
-	public Role(Long id, String name) {
+	public Role(Long id, RoleEnum roleEnum) {
 		super();
 		this.id = id;
-		this.name = name;
+		this.name = roleEnum.getDesc();
 	}
 
 	public Long getId() {
@@ -41,12 +43,12 @@ public class Role implements Serializable{
 		this.id = id;
 	}
 
-	public String getName() {
-		return name;
+	public RoleEnum getName() {
+		return RoleEnum.toEnum(name);
 	}
 
-	public void setName(String name) {
-		this.name = name;
+	public void setName(RoleEnum roleEnum) {
+		this.name = roleEnum.getDesc();
 	}
 
 	@Override
