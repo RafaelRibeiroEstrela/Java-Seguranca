@@ -39,7 +39,7 @@ public class UserResource {
 	}
 	
 	@GetMapping(value = "/{id}")
-	public ResponseEntity<User> findById(Long id) throws ObjectNotFoundException{
+	public ResponseEntity<User> findById(@PathVariable Long id) throws ObjectNotFoundException{
 		return ResponseEntity.ok().body(userService.findById(id));
 	}
 	

@@ -6,6 +6,7 @@ import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import com.example.demo.models.Role;
@@ -23,6 +24,10 @@ public class UserService {
 	
 	@Autowired
 	private RoleRepository roleRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
+	
 	
 	public Page<User> find(Pageable pageable){
 		return userRepository.findAll(pageable);
@@ -46,11 +51,15 @@ public class UserService {
 	
 	public User save(User user) throws ObjectNotFoundException {
 		findRole(user);
+		user.setPassword(passwordEncoder.encode(user.getPassword()));
 		return userRepository.save(user);
 	}
 	
 	public User update(Long id, User user) throws ObjectNotFoundException {
 		User userDb = findById(id);
+		if (user.getPassword() != userDb.getPassword()) {
+			user.setPassword(passwordEncoder.encode(user.getPassword()));
+		}	
 		findRole(user);
 		BeanUtils.copyProperties(user, userDb, "id");
 		return userRepository.save(userDb);
@@ -62,10 +71,15 @@ public class UserService {
 	}
 	
 	private void findRole(User user) throws ObjectNotFoundException {
-		for (Role role : user.getRoles()) {
-			Long id = role.getId();
-			role = roleRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Role not found by id = " + id));
+		if (!user.getRoles().isEmpty() && user.getRoles() != null) {
+			for (Role role : user.getRoles()) {
+				Long id = role.getId();
+				role = roleRepository.findById(id).orElseThrow(() -> new ObjectNotFoundException("Role not found by id = " + id));
+			}
+		}else {
+			throw new IllegalStateException("List of roles can't empty");
 		}
+		
 	}
 	
 
