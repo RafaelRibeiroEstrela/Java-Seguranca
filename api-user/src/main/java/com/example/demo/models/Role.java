@@ -1,49 +1,36 @@
-package com.example.demo.entities;
+package com.example.demo.models;
 
 import java.io.Serializable;
-import java.util.HashSet;
-import java.util.Set;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.JoinTable;
-import javax.persistence.ManyToMany;
 import javax.persistence.Table;
 
 @Entity
-@Table(name = "tb_user")
-public class User implements Serializable {
-
+@Table(name = "tb_role")
+public class Role implements Serializable{
+	
 	private static final long serialVersionUID = 1L;
-
+	
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "role_id")
 	private Long id;
+	
+	@Column(name = "role_name", unique = true)
 	private String name;
 	
-	@Column(unique = true)
-	private String email;
-	private String password;
-
-	@ManyToMany(fetch = FetchType.EAGER)
-	@JoinTable(name = "tb_user_role", joinColumns = @JoinColumn(name = "user_id"), inverseJoinColumns = @JoinColumn(name = "role_id"))
-	private Set<Role> roles = new HashSet<>();
-
-	public User() {
-
+	public Role() {
+		
 	}
 
-	public User(Long id, String name, String email, String password) {
+	public Role(Long id, String name) {
 		super();
 		this.id = id;
 		this.name = name;
-		this.email = email;
-		this.password = password;
 	}
 
 	public Long getId() {
@@ -62,30 +49,6 @@ public class User implements Serializable {
 		this.name = name;
 	}
 
-	public String getEmail() {
-		return email;
-	}
-
-	public void setEmail(String email) {
-		this.email = email;
-	}
-
-	public String getPassword() {
-		return password;
-	}
-
-	public void setPassword(String password) {
-		this.password = password;
-	}
-
-	public Set<Role> getRoles() {
-		return roles;
-	}
-
-	public void setRoles(Set<Role> roles) {
-		this.roles = roles;
-	}
-
 	@Override
 	public int hashCode() {
 		final int prime = 31;
@@ -102,7 +65,7 @@ public class User implements Serializable {
 			return false;
 		if (getClass() != obj.getClass())
 			return false;
-		User other = (User) obj;
+		Role other = (Role) obj;
 		if (id == null) {
 			if (other.id != null)
 				return false;
@@ -110,5 +73,12 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public String toString() {
+		return "Role [id=" + id + ", name=" + name + "]";
+	}
+	
+	
 
 }
