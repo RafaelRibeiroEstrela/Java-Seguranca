@@ -1,9 +1,9 @@
-package com.example.apiautheticationserver.repositories;
+package com.example.apiuser.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 
-import com.example.apiautheticationserver.models.User;
+import com.example.apiuser.models.User;
 
 @Repository
 public interface UserRepository extends JpaRepository<User, Long>{

@@ -1,4 +1,4 @@
-package com.example.apiautheticationserver.rosources;
+package com.example.apiuser.resources;
 
 import java.util.List;
 
@@ -16,8 +16,8 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.example.apiautheticationserver.models.User;
-import com.example.apiautheticationserver.services.UserService;
+import com.example.apiuser.models.User;
+import com.example.apiuser.services.UserService;
 
 @RestController
 @RequestMapping(value = "/users")

@@ -1,8 +1,8 @@
-package com.example.apiautheticationserver.repositories;
+package com.example.apiuser.repositories;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 
-import com.example.apiautheticationserver.models.Role;
+import com.example.apiuser.models.Role;
 
 public interface RoleRepository extends JpaRepository<Role, Long>{
 	

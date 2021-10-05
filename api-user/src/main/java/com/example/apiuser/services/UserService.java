@@ -1,4 +1,4 @@
-package com.example.apiautheticationserver.services;
+package com.example.apiuser.services;
 
 import java.util.List;
 
@@ -9,10 +9,10 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.apiautheticationserver.models.Role;
-import com.example.apiautheticationserver.models.User;
-import com.example.apiautheticationserver.repositories.RoleRepository;
-import com.example.apiautheticationserver.repositories.UserRepository;
+import com.example.apiuser.models.Role;
+import com.example.apiuser.models.User;
+import com.example.apiuser.repositories.RoleRepository;
+import com.example.apiuser.repositories.UserRepository;
 
 @Service
 public class UserService {

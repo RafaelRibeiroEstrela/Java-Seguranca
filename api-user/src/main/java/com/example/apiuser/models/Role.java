@@ -1,14 +1,28 @@
-package com.example.apiautheticationserver.models;
+package com.example.apiuser.models;
 
 import java.io.Serializable;
 
-import com.example.apiautheticationserver.models.enums.RoleEnum;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.Table;
 
+import com.example.apiuser.models.enums.RoleEnum;
+
+@Entity
+@Table(name = "tb_role")
 public class Role implements Serializable{
 	
 	private static final long serialVersionUID = 1L;
 	
+	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+	@Column(name = "role_id")
 	private Long id;
+	
+	@Column(name = "role_name")
 	private String name;
 	
 	public Role() {
