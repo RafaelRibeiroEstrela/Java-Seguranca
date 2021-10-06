@@ -1,4 +1,4 @@
-package com.example.apiautheticationserver.config;
+package com.example.apiautheticationserver.security.config;
 
 import java.util.Arrays;
 
@@ -40,11 +40,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		http.csrf().disable();
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
-		.antMatchers(HttpMethod.GET, PRIVATE).hasAnyRole("USER", "ADMIN")
-		.antMatchers(HttpMethod.POST, PRIVATE).hasRole("ADMIN")
-		.antMatchers(HttpMethod.PUT, PRIVATE).hasRole("ADMIN")
-		.antMatchers(HttpMethod.DELETE, PRIVATE).hasRole("ADMIN")
-		.antMatchers(HttpMethod.PATCH, PRIVATE).hasRole("ADMIN")
+		.antMatchers(PRIVATE).hasAuthority("ROLE_ADMIN")
 		.anyRequest().authenticated();
 		http.headers().frameOptions().disable();
 		http.sessionManagement().sessionCreationPolicy(SessionCreationPolicy.STATELESS);

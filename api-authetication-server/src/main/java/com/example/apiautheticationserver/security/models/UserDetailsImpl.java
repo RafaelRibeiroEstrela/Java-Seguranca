@@ -1,4 +1,4 @@
-package com.example.apiautheticationserver.models;
+package com.example.apiautheticationserver.security.models;
 
 import java.io.Serializable;
 import java.util.ArrayList;
@@ -21,7 +21,7 @@ public class UserDetailsImpl implements UserDetails, Serializable {
 	private Set<Role> roles = new HashSet<>();
 	
 	public UserDetailsImpl(User user) {
-		this.username = user.getEmail();
+		this.username = user.getUsername();
 		this.password = user.getPassword();
 		this.roles = user.getRoles();
 	}

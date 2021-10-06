@@ -1,9 +1,9 @@
-package com.example.apiautheticationserver.models.enums;
+package com.example.apiautheticationserver.security.models.enums;
 
 public enum RoleEnum {
 	
-	USER(0, "USER"),
-	ADMIN(1, "ADMIN");
+	ROLE_USER(0, "ROLE_USER"),
+	ROLE_ADMIN(1, "ROLE_ADMIN");
 	
 	private int cod;
 	private String desc;

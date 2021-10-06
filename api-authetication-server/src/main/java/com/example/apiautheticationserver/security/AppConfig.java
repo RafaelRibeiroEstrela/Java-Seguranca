@@ -1,4 +1,4 @@
-package com.example.apiautheticationserver.config;
+package com.example.apiautheticationserver.security;
 
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
