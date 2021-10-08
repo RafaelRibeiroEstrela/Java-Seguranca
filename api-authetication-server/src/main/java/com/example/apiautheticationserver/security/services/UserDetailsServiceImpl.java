@@ -8,17 +8,16 @@ import org.springframework.stereotype.Service;
 
 import com.example.apiautheticationserver.security.models.User;
 import com.example.apiautheticationserver.security.models.UserDetailsImpl;
-import com.example.apiautheticationserver.security.repositories.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService {
 	
 	@Autowired
-	private UserRepository userRepository;
+	private UserService userService;
 
 	@Override
 	public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-		User user = userRepository.findByUsername(username);
+		User user = userService.findByUsername(username);
 		UserDetailsImpl userDetailsImpl = new UserDetailsImpl(user);
 		return userDetailsImpl;
 	}

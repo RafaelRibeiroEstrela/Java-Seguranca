@@ -40,6 +40,7 @@ public class ResourceServerConfig extends ResourceServerConfigurerAdapter{
 		http.csrf().disable();
 		http.authorizeRequests()
 		.antMatchers(PUBLIC).permitAll()
+		.antMatchers(HttpMethod.GET, PRIVATE).hasAnyAuthority("ROLE_USER")
 		.antMatchers(PRIVATE).hasAuthority("ROLE_ADMIN")
 		.anyRequest().authenticated();
 		http.headers().frameOptions().disable();
