@@ -1,8 +1,10 @@
 package com.example.apiautheticationserver.security.services;
 
+import org.springframework.beans.BeanUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
@@ -15,6 +17,9 @@ public class UserService {
 	
 	@Autowired
 	private UserRepository userRepository;
+	
+	@Autowired
+	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Transactional(readOnly = true)
 	public Page<User> find(Pageable pageable){
@@ -35,6 +40,29 @@ public class UserService {
 		return user;
 	}
 	
+	public User save(User user) {
+		user.setPassword(encriptyPassword(user.getPassword()));
+		return userRepository.save(user);
+	}
+	
+	public User update(Long id, User user) {
+		User userDb = findById(id);
+		if (!user.getPassword().equals(userDb.getPassword())) {
+			user.setPassword(encriptyPassword(user.getPassword()));
+		}
+		
+		BeanUtils.copyProperties(user, userDb, "id");
+		return userRepository.save(userDb);
+	}
+	
+	public void delete(Long id) {
+		findById(id);
+		userRepository.deleteById(id);
+	}
+	
+	private String encriptyPassword(String password) {
+		return passwordEncoder.encode(password);
+	}
 	
 
 }

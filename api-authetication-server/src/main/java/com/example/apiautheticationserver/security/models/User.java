@@ -5,6 +5,7 @@ import java.util.HashSet;
 import java.util.Objects;
 import java.util.Set;
 
+import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
@@ -24,7 +25,11 @@ public class User implements Serializable {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	private Long id;
+	
+	@Column(unique = true, nullable = false)
 	private String username;
+	
+	@Column(nullable = false)
 	private String password;
 
 	@ManyToMany(fetch = FetchType.EAGER)
