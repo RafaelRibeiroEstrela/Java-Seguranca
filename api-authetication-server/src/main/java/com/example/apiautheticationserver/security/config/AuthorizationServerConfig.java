@@ -1,6 +1,7 @@
 package com.example.apiautheticationserver.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -16,12 +17,21 @@ import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 @EnableAuthorizationServer
 public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdapter{
 	
+	
+	//Criptografia da senha
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private JwtAccessTokenConverter accessTokenConverter;
 	
+	@Value("${var.security.client}")
+	private String configWithClient;
+	
+	@Value("${var.security.secret}")
+	private String configSecret;
+	
+	//Armazenamento do token
 	@Autowired
 	private JwtTokenStore tokenStore;
 
@@ -33,11 +43,12 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 		security.tokenKeyAccess("permitAll()").checkTokenAccess("isAutheticated()");
 	}
 
+	//Atributos de acesso do token da aplicacao
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-		.withClient("client-id-hardcode")
-		.secret(passwordEncoder.encode("client-secret-hardcode"))
+		.withClient(configWithClient)
+		.secret(passwordEncoder.encode(configSecret))
 		.scopes("read", "write")
 		.authorizedGrantTypes("password")
 		.accessTokenValiditySeconds(6000);
