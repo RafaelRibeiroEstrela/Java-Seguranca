@@ -34,7 +34,7 @@ public class UserResource {
 		return ResponseEntity.ok().body(userService.findById(id));
 	}
 	
-	@GetMapping(value = "/findByUsername")
+	@GetMapping(value = "/findbyusername")
 	public ResponseEntity<User> findByUsername(@RequestParam String username){
 		return ResponseEntity.ok().body(userService.findByUsername(username));
 	}
