@@ -1,7 +1,6 @@
 package com.example.apiautheticationserver.security.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -25,12 +24,6 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Autowired
 	private JwtAccessTokenConverter accessTokenConverter;
 	
-	@Value("${var.security.client}")
-	private String configWithClient;
-	
-	@Value("${var.security.secret}")
-	private String configSecret;
-	
 	//Armazenamento do token
 	@Autowired
 	private JwtTokenStore tokenStore;
@@ -47,8 +40,8 @@ public class AuthorizationServerConfig extends AuthorizationServerConfigurerAdap
 	@Override
 	public void configure(ClientDetailsServiceConfigurer clients) throws Exception {
 		clients.inMemory()
-		.withClient(configWithClient)
-		.secret(passwordEncoder.encode(configSecret))
+		.withClient("client-secret")
+		.secret(passwordEncoder.encode("config-secret"))
 		.scopes("read", "write")
 		.authorizedGrantTypes("password")
 		.accessTokenValiditySeconds(6000);
