@@ -8,18 +8,16 @@ import org.springframework.security.config.annotation.authentication.builders.Au
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
-import org.springframework.security.oauth2.provider.token.store.JwtAccessTokenConverter;
-import org.springframework.security.oauth2.provider.token.store.JwtTokenStore;
 
 @Configuration
-public class SecurityConfig extends WebSecurityConfigurerAdapter{
-
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter{
+	
 	@Autowired
 	private BCryptPasswordEncoder passwordEncoder;
 	
 	@Autowired
 	private UserDetailsService userDetailsService;
-
+	
 	@Override
 	@Autowired
 	protected void configure(AuthenticationManagerBuilder auth) throws Exception {
@@ -32,22 +30,6 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter{
 		return super.authenticationManager();
 	}
 	
-	@Bean 
-	public BCryptPasswordEncoder bCryptPasswordEncoder() {
-		return new BCryptPasswordEncoder();
-	} 
 	
-	@Bean
-	public JwtAccessTokenConverter acessTokenConverter() {
-		JwtAccessTokenConverter tokenConverter = new JwtAccessTokenConverter();
-		tokenConverter.setSigningKey("JWT-KEY-HARDCODE");
-		return tokenConverter;
-	}
-	
-	@Bean
-	public JwtTokenStore tokenStore() {
-		return new JwtTokenStore(acessTokenConverter());
-	}
 
-	
 }
