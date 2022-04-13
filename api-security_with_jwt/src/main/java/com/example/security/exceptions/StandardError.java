@@ -1,4 +1,4 @@
-package com.example.security.resources.exceptions;
+package com.example.security.exceptions;
 
 import java.io.Serializable;
 import java.time.LocalDateTime;
@@ -6,7 +6,7 @@ import java.time.LocalDateTime;
 import com.fasterxml.jackson.annotation.JsonFormat;
 
 public class StandardError implements Serializable{
-	
+
 	private static final long serialVersionUID = 1L;
 	
 	@JsonFormat(pattern = "dd/MM/yyyy HH:mm:ss")
@@ -58,7 +58,5 @@ public class StandardError implements Serializable{
 	public void setPath(String path) {
 		this.path = path;
 	}
-	
-	
 
 }

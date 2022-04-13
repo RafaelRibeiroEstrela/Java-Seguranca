@@ -13,9 +13,9 @@ import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import com.example.security.exceptions.ApiException;
 import com.example.security.models.User;
 import com.example.security.repositories.UserRepository;
-import com.example.security.services.exceptions.ApiException;
 
 @Service
 public class UserService implements UserDetailsService {

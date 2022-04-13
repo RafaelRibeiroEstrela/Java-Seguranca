@@ -1,11 +1,11 @@
-package com.example.security.services.exceptions;
+package com.example.security.exceptions;
 
 public class ApiException extends RuntimeException{
 
 	private static final long serialVersionUID = 1L;
 
-	public ApiException() {
-		super();
+	public ApiException(String message, Throwable cause) {
+		super(message, cause);
 		// TODO Auto-generated constructor stub
 	}
 
@@ -13,8 +13,6 @@ public class ApiException extends RuntimeException{
 		super(message);
 		// TODO Auto-generated constructor stub
 	}
-	
-	
 	
 	
 
