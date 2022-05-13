@@ -1,4 +1,4 @@
-package com.example.security.config;
+package com.example.security.configs;
 
 import java.util.Arrays;
 
